@@ -68,7 +68,7 @@ resource "aws_s3_bucket_policy" "front" {
       "Resource":"${aws_s3_bucket.front.arn}"
     },
     {
-      "Effect":"allow",
+      "Effect":"Allow",
       "Principal":
       {
         "AWS":"${aws_iam_user.s3_front_user.arn}"
@@ -77,7 +77,7 @@ resource "aws_s3_bucket_policy" "front" {
       "Resource":"${aws_s3_bucket.front.arn}"
     },
     {
-      "Effect":"allow",
+      "Effect":"Allow",
       "Principal":
       {
         "AWS":"${aws_iam_user.s3_front_user.arn}"
@@ -91,7 +91,7 @@ resource "aws_s3_bucket_policy" "front" {
       "Resource":"${aws_s3_bucket.front.arn}/*"
     },
     {
-      "Effect":"allow",
+      "Effect":"Allow",
       "Principal":
       {
         "AWS":"${aws_iam_user.s3_front_user.arn}"
