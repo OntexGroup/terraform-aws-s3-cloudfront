@@ -89,6 +89,19 @@ resource "aws_s3_bucket_policy" "front" {
         "s3:PutObjectAcl"
       ],
       "Resource":"${aws_s3_bucket.front.arn}/*"
+    },
+    {
+      "Effect":"allow",
+      "Principal":
+      {
+        "AWS":"${aws_iam_user.s3_front_user.arn}"
+      },
+      "Action": [
+        "cloudfront:CreateInvalidation",
+        "cloudfront:GetInvalidation",
+        "cloudfront:ListInvalidations"
+      ],
+      "Resource":"${aws_cloudfront_distribution.s3_distribution.arn}"
     }
   ]
 }
