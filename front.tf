@@ -141,9 +141,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 1350
-    max_ttl                = 31536000
+    min_ttl                = var.front["min_ttl"] 
+    max_ttl                = var.front["max_ttl"]
+    default_ttl            = var.front["default_ttl"]
   }
 
   restrictions {
