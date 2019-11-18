@@ -4,9 +4,9 @@ locals {
 }
 
 resource "aws_route53_record" "s3_distribution_v4" {
-  count   = var.dns["use_route53"] ? 1 : 0
-  zone_id = data.aws_route53_zone.main[count.index].zone_id
-  name    = var.dns["hostname"]
+  count   = length(var.dns["hostnames"])
+  zone_id = data.aws_route53_zone.main[0].zone_id
+  name    = var.dns["hostnames"][count.index]
   type    = "A"
 
   alias {
@@ -17,9 +17,9 @@ resource "aws_route53_record" "s3_distribution_v4" {
 }
 
 resource "aws_route53_record" "s3_distribution_v6" {
-  count   = var.dns["use_route53"] ? 1 : 0
-  zone_id = data.aws_route53_zone.main[count.index].zone_id
-  name    = var.dns["hostname"]
+  count   = length(var.dns["hostnames"])
+  zone_id = data.aws_route53_zone.main[0].zone_id
+  name    = var.dns["hostnames"][count.index]
   type    = "AAAA"
 
   alias {
@@ -114,6 +114,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   enabled             = true
   is_ipv6_enabled     = true
   default_root_object = "index.html"
+  wait_for_deployment = var.front["wait_for_deployment"]
 
   aliases = var.front["aliases"] != [] ? var.front["aliases"] : null
 

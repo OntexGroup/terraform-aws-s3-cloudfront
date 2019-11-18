@@ -14,6 +14,6 @@ data "aws_availability_zones" "available" {}
 data "aws_caller_identity" "current" {}
 
 data "aws_route53_zone" "main" {
-  count = var.dns["use_route53"] ? 1 : 0
+  count = length(var.dns["hostnames"]) > 0 ? 1 : 0
   name  = var.dns["domain_name"]
 }
